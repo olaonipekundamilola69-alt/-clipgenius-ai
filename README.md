@@ -1,1 +1,1 @@
-index.html.
+clipgenius-ai-index.html
