@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClipGenius AI | Turn Videos Into Viral Clips</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#080b14;color:white}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #202638}
+.logo{font-size:24px;font-weight:bold;color:#8b7cff}
+.logo span{color:white}
+nav a{color:#bbb;text-decoration:none;margin-left:22px;font-size:14px}
+.hero{text-align:center;padding:85px 20px 55px}
+.badge{display:inline-block;background:#17152e;color:#a99cff;padding:9px 16px;border-radius:30px;font-size:12px;margin-bottom:25px}
+h1{font-size:clamp(38px,7vw,65px);line-height:1.12;margin-bottom:20px}
+h1 span{color:#9482ff}
+.hero p{color:#a5aabe;max-width:550px;margin:0 auto 30px;line-height:1.7}
+.card{max-width:650px;margin:0 auto;background:#111727;border:1px solid #293149;border-radius:18px;padding:25px;text-align:left}
+label{display:block;margin:17px 0 9px;font-size:13px;color:#c4c8d6}
+input,select{width:100%;padding:15px;background:#090e1b;border:1px solid #303951;border-radius:9px;color:white;outline:none}
+button{width:100%;padding:16px;background:#806aff;border:0;border-radius:9px;color:white;font-weight:bold;font-size:15px;margin-top:20px;cursor:pointer}
+button:hover{background:#6b55ed}
+.upload{padding:25px;border:1px dashed #6555a7;border-radius:10px;text-align:center;color:#aaa}
+.upload input{border:0;padding:10px}
+#preview{display:none;width:100%;margin-top:15px;border-radius:10px}
+#status{margin-top:15px;color:#b6aaff;font-size:13px;text-align:center}
+.features{padding:65px 7%;text-align:center}
+.features h2{font-size:32px;margin-bottom:12px}
+.subtitle{color:#9299ac;margin-bottom:35px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.feature{background:#111727;border:1px solid #252d43;padding:25px;border-radius:14px;text-align:left}
+.feature h3{margin:14px 0 10px}
+.feature p{font-size:13px;color:#a3aabe;line-height:1.6}
+.icon{font-size:27px}
+footer{text-align:center;padding:35px;color:#777;border-top:1px solid #202638;font-size:13px}
+@media(max-width:600px){nav a{margin-left:10px;font-size:12px}.hero{padding-top:60px}.card{padding:18px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">ClipGenius<span> AI</span></div>
+<nav>
+<a href="#home">Home</a>
+<a href="#features">Features</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="badge">✦ YOUR AI VIDEO CLIPPING ASSISTANT</div>
+<h1>Long Videos.<br><span>Viral Moments.</span></h1>
+<p>Turn your long videos into engaging short-form content. Discover highlights, create captions and prepare clips for TikTok, YouTube Shorts and Instagram Reels.</p>
+
+<div class="card">
+<h2>Start Creating Clips ✂️</h2>
+
+<label>Paste a video URL</label>
+<input type="url" id="videoUrl" placeholder="Paste your YouTube video link here">
+
+<p style="text-align:center;color:#777;margin:15px">OR UPLOAD A VIDEO</p>
+
+<div class="upload">
+<p>📁 Select a video from your device</p>
+<input type="file" id="videoFile" accept="video/*">
+</div>
+
+<video id="preview" controls></video>
+
+<label>Content Category</label>
+<select id="category">
+<option>Gaming</option>
+<option>Podcast</option>
+<option>Interview</option>
+<option>Motivational</option>
+<option>Educational</option>
+<option>Other</option>
+</select>
+
+<label>Preferred Clip Length</label>
+<select id="duration">
+<option>30 seconds</option>
+<option>45 seconds</option>
+<option>60 seconds</option>
+<option>90 seconds</option>
+</select>
+
+<button onclick="startProcess()">Generate My Clips →</button>
+<div id="status">Your next great clip starts here.</div>
+</div>
+</section>
+
+<section class="features" id="features">
+<h2>Everything You Need to Create</h2>
+<p class="subtitle">Built for creators who want to create more in less time.</p>
+
+<div class="grid">
+<div class="feature">
+<div class="icon">🤖</div>
+<h3>AI Highlight Detection</h3>
+<p>Find interesting moments and potential highlights in long videos.</p>
+</div>
+
+<div class="feature">
+<div class="icon">💬</div>
+<h3>Smart Captions</h3>
+<p>Make your videos easier to watch with automatic subtitles.</p>
+</div>
+
+<div class="feature">
+<div class="icon">📱</div>
+<h3>Vertical Formatting</h3>
+<p>Prepare videos for TikTok, Instagram Reels and YouTube Shorts.</p>
+</div>
+
+<div class="feature">
+<div class="icon">⚡</div>
+<h3>Creator Workflow</h3>
+<p>Make the process of turning long videos into short content easier.</p>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 ClipGenius AI. Built for the next generation of creators.</p>
+<p style="margin-top:8px">Create smarter. Clip faster.</p>
+</footer>
+
+<script>
+const fileInput=document.getElementById('videoFile');
+const preview=document.getElementById('preview');
+
+fileInput.addEventListener('change',function(){
+if(this.files.length){
+preview.src=URL.createObjectURL(this.files[0]);
+preview.style.display='block';
+document.getElementById('status').textContent='Video selected successfully!';
+}
+});
+
+function startProcess(){
+const url=document.getElementById('videoUrl').value;
+const file=fileInput.files.length;
+
+if(!url&&!file){
+document.getElementById('status').textContent='Please paste a video URL or upload a video first.';
+return;
+}
+
+document.getElementById('status').textContent='Your video is selected! AI processing will be available when the backend is connected.';
+}
+</script>
+
+</body>
+</html>
